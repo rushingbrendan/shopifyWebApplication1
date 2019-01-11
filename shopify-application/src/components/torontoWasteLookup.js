@@ -6,6 +6,7 @@ class TorontoWasteLookup extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            searchInput: '',
             //searchKeyword: "takeout",
             searchKeyword: "egg carton",
             //searchKeyword: "bread bag tag, milk bag tag, elastic band, rubber band, twist tie, rope, twine, string, hemp, ribbon, bow, burlap, staple, fastener, wire, florists wire, plastic tag, tape, duct tape, electrical tape, masking tape, scotch tape, painters tape, tape dispenser, chain, nylon, thread",
@@ -18,8 +19,14 @@ class TorontoWasteLookup extends Component {
 
     }
 
+    updateSearchInput(event) {
+        this.setState({
+          searchInput: event.target.value
+        });
+    }
+
     /* Triggered when search button is clicked */
-    handleKeyWordSearch = (event) => {
+    handleKeywordSearch = (event) => {
         fetch('https://secure.toronto.ca/cc_sr_v1/data/swm_waste_wizard_APR?limit=1000')
         .then(res => res.json())
         .then(rawData => this.setState({rawData}));
@@ -31,16 +38,18 @@ class TorontoWasteLookup extends Component {
       <h1>Toronto Waste Lookup</h1>
 
       
+      
       <div>
-      <input type="text"></input>
-      <button id="searchButton" onClick={this.handleKeyWordSearch}>Search</button>
+      <input type="text" value={this.state.searchInput} onChange={event => this.updateSearchInput(event)}></input>
+      <button id="searchButton" onClick={this.handleKeywordSearch}>Search</button>
       </div>
       
-      {this.state.rawData.filter(result=>result.keywords.match(this.state.searchKeyword)).map(item=>
+      {this.state.rawData.filter(result=>result.keywords.match(this.state.searchInput)).map(item=>
+      
         <div>
             <h2>{item.title}</h2>
             <div>
-                <p>{item.body}</p>
+                {item.body.split('&lt;').join('<').split('&gt;').join('>')}
 
             </div>
         </div>
