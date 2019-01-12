@@ -1,0 +1,67 @@
+.wasteInfoContainer
+{
+    margin: auto;
+    width: 100%;
+    background-color: white;
+    vertical-align: middle;
+    text-align: center;
+    min-width: 800px;
+    align-content: center;
+
+}
+
+.searchInput
+{
+    width: 1000px;
+    height: 50px;
+    font-size: 20pt;
+}
+
+
+.center 
+{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.APIreturnedDataFont
+{
+    font-size: 14pt;
+    display: flex;
+    justify-content: center;
+
+    
+}
+
+.headerBox
+{
+    width: 1100px;
+    height: 100px;
+    background-color: green;
+    color: white;
+    display: flex;
+    justify-content: center;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+        
+}
+
+.spaceUnderHeader
+{
+    line-height: 80px;
+}
+
+.spaceAboveHeader
+{
+    line-height: 20px;
+}
+
+.searchButton
+{
+    width: 200px;
+    height: 50px;
+}
