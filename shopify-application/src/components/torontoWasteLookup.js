@@ -17,7 +17,7 @@ class TorontoWasteLookup extends Component {
             rawData: [],
             matchedData: [],
             favourites: [],
-            selectedFavourite: ''
+            selectedFavourite: "Oversize (flooring & carpeting)"
         };
     }
 
@@ -39,8 +39,13 @@ class TorontoWasteLookup extends Component {
           if(event.target.checked === true){
             this.state.favourites.push(event.target.value)      
           }
-          else{
-            this.state.favourites.pop(event.target.value)      
+          else if (event.target.checked === false){
+                // Find and remove item from an array
+                var i = this.state.favourites.indexOf(event.target.value);
+                if(i !== -1) {
+	                this.state.favourites.splice(i, 1);
+                }
+            //this.state.favourites.pop(event.target.value)      
           }
         
       }
@@ -53,8 +58,7 @@ class TorontoWasteLookup extends Component {
     }
 
     getDataFromAPI = (event) => {
-        return(
-            //<div dangerouslySetInnerHTML={{__html: "<p>foo bar</p>"}} />      
+        return(              
             <div>
             {this.state.rawData.filter(result=>result.keywords.match(this.state.searchInput)).map(item=>
             
@@ -62,7 +66,7 @@ class TorontoWasteLookup extends Component {
                   <table border="1">
                       <tbody>
                           <td width="5" align="right">
-                              <input type="checkbox" value={item.title} onChange={this.updateFavourites} ></input>
+                              <input type="checkbox" value={item.title} onChange={this.updateFavourites} defaultChecked={false}></input>
                           </td>
                           <td width ="500 px" align="left">
                               <h4>&nbsp;&nbsp;{item.title}</h4>
@@ -83,17 +87,16 @@ class TorontoWasteLookup extends Component {
 
 
 
-    displayFavourites = (event) => {
-        return(
-            //<div dangerouslySetInnerHTML={{__html: "<p>foo bar</p>"}} />      
+    displayCurrentFavourite = (event) => {
+        return(              
             <div>
-            {this.state.rawData.filter(result=>result.keywords.match(this.state.favourites.filter())).map(item=>
+            {this.state.rawData.filter(result=>result.title.match(this.state.selectedFavourite)).map(item=>
             
               <div className="APIreturnedDataFont" >      
                   <table border="1">
                       <tbody>
                           <td width="5" align="right">
-                              <input type="checkbox" value={item.title} onChange={this.updateFavourites} ></input>
+                              <input type="checkbox" value={item.title} onChange={this.updateFavourites} defaultChecked={false}></input>
                           </td>
                           <td width ="500 px" align="left">
                               <h4>&nbsp;&nbsp;{item.title}</h4>
@@ -111,6 +114,45 @@ class TorontoWasteLookup extends Component {
       </div>
         )
     }
+
+
+    displayUserFavourites = (event) => {
+        return(
+            <div>
+                {this.state.favourites.map(selectedFavourite=>
+                <div>
+                    {this.state.rawData.map(selectedItem =>
+                        {selectedItem.title.match(selectedFavourite)(selectedItem =>
+
+                            <div className="APIreturnedDataFont" >      
+                            <table border="1">
+                                <tbody>                                
+                                    <td width="5" align="right">
+                                        <input type="checkbox" value={selectedItem.title} onChange={this.updateFavourites} defaultChecked={false}></input>
+                                    </td>
+                                    <td width ="500 px" align="left">
+                                        <h4>&nbsp;&nbsp;{selectedItem.title}</h4>
+                                    </td>                    
+                                    <td width="700 px" align="left">
+                                    
+                                      <div dangerouslySetInnerHTML={{
+                                          __html: selectedItem.body.split('&lt;').join('<').split('&gt;').join('>')
+                                          }} />                                                          
+                                    </td>      
+                                </tbody>
+                            </table>                      
+                        </div>
+                            
+                        )}
+                            
+                        
+                        )} 
+                    </div>
+                )}                
+            </div>    
+        )}
+
+
 
 
 
@@ -153,8 +195,9 @@ class TorontoWasteLookup extends Component {
 
       {this.getDataFromAPI()}
 
-      
-      
+      <br className ="spaceUnderHeader"></br>
+      <h1>Current Favourite</h1>
+      {this.displayCurrentFavourite()}
 
 
 
