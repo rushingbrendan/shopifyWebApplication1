@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './torontoWasteLookup.css';
+//import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css';
 
 
 class TorontoWasteLookup extends Component {
@@ -60,7 +61,7 @@ class TorontoWasteLookup extends Component {
     getDataFromAPI = (event) => {
         return(              
             <div>
-            {this.state.rawData.filter(result=>result.keywords.match(this.state.searchInput)).map(item=>
+            {this.state.rawData.filter(result=>result.keywords.includes(this.state.searchInput)).map(item=>
             
               <div className="APIreturnedDataFont" >      
                   <table border="1">
@@ -86,11 +87,10 @@ class TorontoWasteLookup extends Component {
     }
 
 
-
-    displayCurrentFavourite = (event) => {
+    displayUserFavouritesFunction = (event) => {
         return(              
             <div>
-            {this.state.rawData.filter(result=>result.title.match(this.state.selectedFavourite)).map(item=>
+            {this.state.rawData.filter(result=>this.state.favourites.includes(result.title)).map(item=>
             
               <div className="APIreturnedDataFont" >      
                   <table border="1">
@@ -119,38 +119,20 @@ class TorontoWasteLookup extends Component {
     displayUserFavourites = (event) => {
         return(
             <div>
-                {this.state.favourites.map(selectedFavourite=>
-                <div>
-                    {this.state.rawData.map(selectedItem =>
-                        {selectedItem.title.match(selectedFavourite)(selectedItem =>
-
-                            <div className="APIreturnedDataFont" >      
-                            <table border="1">
-                                <tbody>                                
-                                    <td width="5" align="right">
-                                        <input type="checkbox" value={selectedItem.title} onChange={this.updateFavourites} defaultChecked={false}></input>
-                                    </td>
-                                    <td width ="500 px" align="left">
-                                        <h4>&nbsp;&nbsp;{selectedItem.title}</h4>
-                                    </td>                    
-                                    <td width="700 px" align="left">
-                                    
-                                      <div dangerouslySetInnerHTML={{
-                                          __html: selectedItem.body.split('&lt;').join('<').split('&gt;').join('>')
-                                          }} />                                                          
-                                    </td>      
-                                </tbody>
-                            </table>                      
-                        </div>
-                            
-                        )}
-                            
+                {this.state.favourites.map(currentFavourite =>
+                    {this.state.rawData.map(currentItem =>
                         
-                        )} 
-                    </div>
-                )}                
-            </div>    
-        )}
+                        {if (1 === 1){
+                            return (<div>UDYSKFHKHF</div>)
+                        }}
+                        
+                        )}                    
+                    )}
+
+            </div>
+            )}
+
+
 
 
 
@@ -173,33 +155,27 @@ class TorontoWasteLookup extends Component {
       <div>
       <input type="text" className="searchInput" value={this.state.searchInput} onChange={event => this.updateSearchInput(event)}></input>
             
-      <button id="searchButton" className="searchButton" onClick={this.handleKeywordSearch}>Search</button>
+      <button id="searchButton" className="fas fa-search" onClick={this.handleKeywordSearch}></button>
       </div>
 
 
       <br className ="spaceUnderHeader"></br>
 
-      <div>
-      {this.state.favourites.map(favourites=>
-            
-        <div className="APIreturnedDataFont" > 
-        {favourites}     
-
-            
-
-        </div>
-        )}
-
-        </div>
+ 
 
 
       {this.getDataFromAPI()}
 
       <br className ="spaceUnderHeader"></br>
       <h1>Current Favourite</h1>
-      {this.displayCurrentFavourite()}
 
-
+      {this.state.favourites.map(favourites=>
+            
+            <div className="APIreturnedDataFont" > 
+            {favourites}     
+            </div>
+            )}
+        {this.displayUserFavouritesFunction()}
 
 
       </div>
