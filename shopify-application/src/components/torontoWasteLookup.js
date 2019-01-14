@@ -120,6 +120,22 @@ class TorontoWasteLookup extends Component {
         }    
     }
 
+    displayFavouritesTitle = (event) => {
+
+        if ((this.state.favourites.length) > 1){
+            return(
+                <div className="favouritesContainer">
+                <p className="favouritesTitle">Favourites</p>
+                <br className="spaceUnderHeader"></br>
+                </div>
+            )
+
+        }
+        else{
+            return(<div></div>)
+        }    
+    }
+
     
 
 
@@ -160,11 +176,11 @@ class TorontoWasteLookup extends Component {
       <div className ="searchFrame">
         {this.getDataFromAPI()}
 
-        <div className="favouritesContainer">
-            <p className="favouritesTitle">Favourites</p>
-            <br className="spaceUnderHeader"></br>
-            </div>
 
+
+{this.displayFavouritesTitle()}
+                
+                <br className ="spaceUnderHeader"></br>
         {this.displayUserFavouritesFunction()}
 
         </div>

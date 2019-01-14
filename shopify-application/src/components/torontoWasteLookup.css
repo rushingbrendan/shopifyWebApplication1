@@ -5,10 +5,11 @@ ul li { padding: 5px 0px; }
 {
     background-color: white;
     width: 1200px;
-    height: 900px;
+    
     
     justify-content: center;
     margin: auto;
+    height: 100%;
 }
 .wasteInfoContainer
 {
