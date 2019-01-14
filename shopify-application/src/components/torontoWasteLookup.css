@@ -5,7 +5,7 @@ ul li { padding: 5px 0px; }
 {
     background-color: white;
     width: 1200px;
-    height: 1200px;
+    height: 2000px;
     
     justify-content: center;
     margin: auto;
@@ -43,6 +43,9 @@ ul li { padding: 5px 0px; }
     font-size: 14pt;
     display: flex;
     justify-content: center;
+    height: 100%;
+    background-color: white;
+
 
     
 }
@@ -61,6 +64,14 @@ ul li { padding: 5px 0px; }
     text-align: center;
         
 }
+
+.favouriteBackground
+{
+
+    background-color: white;
+    
+}
+
 
 .spaceUnderHeader
 {
@@ -84,6 +95,7 @@ ul li { padding: 5px 0px; }
     margin-left: auto;
     margin-right: auto;
     text-align: center;
+    position: relative;
 }
 
 * {
@@ -180,6 +192,15 @@ form.example::after {
 
 .favouriteCheckbox
 {
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
+}
+
+.favouritesCountainer
+{
+
+    
+    width: 1050px;
+    height: 10px;
+
 }

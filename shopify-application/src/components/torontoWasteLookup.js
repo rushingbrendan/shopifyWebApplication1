@@ -55,63 +55,67 @@ class TorontoWasteLookup extends Component {
     }
 
     getDataFromAPI = (event) => {
-        return(              
-            <div>
-            {this.state.rawData.filter(result=>result.keywords.includes(this.state.searchInput)).map(item=>
-            
-              <div className="APIreturnedDataFont" >                                      
+    return(              
+        <div>
+        {this.state.rawData.filter(result=>result.keywords.includes(this.state.searchInput)).map(item=>            
+            <div className="APIreturnedDataFont" >                                      
                 <div className="checkboxColumn">
-                <br></br>
-                    <input type="checkbox" className="favouriteCheckbox" key={item.title} value={item.title} onChange={this.updateFavourites} 
-                     defaultChecked={this.determineCheckStatus}>
-                     </input>
+                    <br></br>
+                <input type="checkbox" className="favouriteCheckbox" key={item.title} value={item.title} onChange={this.updateFavourites} 
+                    defaultChecked={this.determineCheckStatus}>
+                </input>
             </div>
-                <div className="titleColumn">
-                    <h4>&nbsp;&nbsp;{item.title}</h4>
-                </div>                    
-                <div className="horizontalPaddingColumn"></div>
+            <div className="titleColumn">
+                <h4>&nbsp;&nbsp;{item.title}</h4>
+            </div>                    
+            <div className="horizontalPaddingColumn"></div>
                 <div className="bodyColumn">
-                
+        
                 <div dangerouslySetInnerHTML={{
                     __html: item.body.split('&lt;').join('<').split('&gt;').join('>')
-                    }} />                                                          
-                </div>                                              
-              </div>
-            )}      
+                }} />                                                          
+            </div>                                              
+        </div>
+        )}      
       </div>
         )
     }
+
+
 
 
     displayUserFavouritesFunction = (event) => {
         return(              
             <div>
-                <p className="favouritesTitle">Favourites</p>
+
             {this.state.rawData.filter(result=>this.state.favourites.includes(result.title)).map(item=>
             
-              <div className="APIreturnedDataFont" >      
-                  <table border="1">
-                      <tbody>
-                          <td width="10 px" align="right">
-                              <input type="checkbox" value={item.title} 
-                                onChange={this.updateFavourites} checked={true}></input>
-                          </td>
-                          <td width ="500 px" align="left">
-                              <h4>&nbsp;&nbsp;{item.title}</h4>
-                          </td>                    
-                          <td width="700 px" align="left">
-                          
-                            <div dangerouslySetInnerHTML={{
-                                __html: item.body.split('&lt;').join('<').split('&gt;').join('>')
-                                }} />                                                          
-                          </td>      
-                      </tbody>
-                  </table>                      
-              </div>
+            
+            <div className="APIreturnedDataFont" >                                      
+                <div className="checkboxColumn">
+                    <br></br>
+                    <input type="checkbox" className="favouriteCheckbox" key={item.title} value={item.title} onChange={this.updateFavourites} 
+                        checked={true}>
+                    </input>
+                </div>
+            <div className="titleColumn">
+                <h4>&nbsp;&nbsp;{item.title}</h4>
+            </div>                    
+            <div className="horizontalPaddingColumn"></div>
+                <div className="bodyColumn">
+        
+                <div dangerouslySetInnerHTML={{
+                    __html: item.body.split('&lt;').join('<').split('&gt;').join('>')
+                }} />                                                          
+            </div>  
+            </div>                                            
+        
             )}      
       </div>
         )
     }
+
+    
 
 
     determineCheckStatus = (event) => {
@@ -130,34 +134,32 @@ class TorontoWasteLookup extends Component {
     return (
         
       <div className="App">
-      <br></br>
-      
-      <div className="headerBox">
-      <h1 className="headerTitle">Toronto Waste Lookup</h1>
-      </div>
-    
-      <br className ="spaceUnderHeader"></br>
+        <br></br>
+        
+        <div className="headerBox">
+        <h1 className="headerTitle">Toronto Waste Lookup</h1>
+        </div>
+        
+        <br className ="spaceUnderHeader"></br>
 
-      <div className ="searchFrame">
-        <input type="text" className="searchInput" value={this.state.searchInput} placeholder="Enter search keyword..."
-            onChange={event => this.updateSearchInput(event)}></input>     
-                               
-        <button className="searchButton" id="searchButton" type="button" onClick={this.handleKeywordSearch}>
-            <i class="fa fa-search fa-3x"></i>
-        </button>
-      </div>
+        <div className ="searchFrame">
+            <input type="text" className="searchInput" value={this.state.searchInput} placeholder="Enter search keyword..."
+                onChange={event => this.updateSearchInput(event)}></input>     
+                                
+            <button className="searchButton" id="searchButton" type="button" onClick={this.handleKeywordSearch}>
+                <i class="fa fa-search fa-3x"></i>
+            </button>
+        </div>
 
         
-
-
- 
-
-
       <div className ="searchFrame">
-      {this.getDataFromAPI()}
+        {this.getDataFromAPI()}
 
-      
-    
+        <div className="favouritesContainer">
+            <p className="favouritesTitle">Favourites</p>
+            <br className="spaceUnderHeader"></br>
+            </div>
+
       
         {this.displayUserFavouritesFunction()}
 
