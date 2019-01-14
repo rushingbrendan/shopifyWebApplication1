@@ -57,31 +57,36 @@ class TorontoWasteLookup extends Component {
     }
 
     getDataFromAPI = (event) => {
-    return(              
-        <div >
-        {this.state.rawData.filter(result=>result.keywords.includes(this.state.searchInput)).map(item=>            
-            <div className="APIreturnedDataFont" >                                      
-                <div className="checkboxColumn">
-                    <br></br>
-                <input type="checkbox" className="favouriteCheckbox" key={item.title} value={item.title} onChange={this.updateFavourites} 
-                    defaultChecked={this.determineCheckStatus}>
-                </input>
-            </div>
-            <div className="titleColumn">
-                <h4>&nbsp;&nbsp;{item.title}</h4>
-            </div>                    
-            <div className="horizontalPaddingColumn"></div>
-                <div className="bodyColumn">
-        
-                <div dangerouslySetInnerHTML={{
-                    __html: item.body.split('&lt;').join('<').split('&gt;').join('>')
-                }} />                                                          
-            </div>                                              
-        </div>
-        )}
-        
-      </div>
-        )
+        if (this.state.searchInput !== '')              {
+            return(
+                <div >
+                {this.state.rawData.filter(result=>result.keywords.includes(this.state.searchInput)).map(item=>            
+                    <div className="APIreturnedDataFont" >                                      
+                        <div className="checkboxColumn">
+                            <br></br>
+                        <input type="checkbox" className="favouriteCheckbox" key={item.title} value={item.title} onChange={this.updateFavourites} 
+                            defaultChecked={this.determineCheckStatus}>
+                        </input>
+                    </div>
+                    <div className="titleColumn">
+                        <h4>&nbsp;&nbsp;{item.title}</h4>
+                    </div>                    
+                    <div className="horizontalPaddingColumn"></div>
+                        <div className="bodyColumn">
+                
+                        <div dangerouslySetInnerHTML={{
+                            __html: item.body.split('&lt;').join('<').split('&gt;').join('>')
+                        }} />                                                          
+                    </div>                                              
+                </div>
+                )}
+                
+              </div>
+                )
+        }
+        else{
+            return (<div></div>)
+        }
     }
 
 
