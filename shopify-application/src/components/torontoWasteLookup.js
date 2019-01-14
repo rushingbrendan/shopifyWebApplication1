@@ -86,6 +86,7 @@ class TorontoWasteLookup extends Component {
     displayUserFavouritesFunction = (event) => {
         return(              
             <div>
+                <p className="favouritesTitle">Favourites</p>
             {this.state.rawData.filter(result=>this.state.favourites.includes(result.title)).map(item=>
             
               <div className="APIreturnedDataFont" >      
@@ -127,17 +128,22 @@ class TorontoWasteLookup extends Component {
 
       
     return (
+        
       <div className="App">
-      <br className ="spaceAboveHeader"></br>
+      <br></br>
+      
       <div className="headerBox">
-      <h1>Toronto Waste Lookup</h1>
+      <h1 className="headerTitle">Toronto Waste Lookup</h1>
       </div>
+    
       <br className ="spaceUnderHeader"></br>
 
       <div className ="searchFrame">
-        <input type="text" className="searchInput" value={this.state.searchInput} onChange={event => this.updateSearchInput(event)}></input>            
+        <input type="text" className="searchInput" value={this.state.searchInput} placeholder="Enter search keyword..."
+            onChange={event => this.updateSearchInput(event)}></input>     
+                               
         <button className="searchButton" id="searchButton" type="button" onClick={this.handleKeywordSearch}>
-            <i class="fa fa-search fa-2x"></i>
+            <i class="fa fa-search fa-3x"></i>
         </button>
       </div>
 
@@ -151,7 +157,7 @@ class TorontoWasteLookup extends Component {
       {this.getDataFromAPI()}
 
       
-      <h1>Current Favourite</h1>
+    
       
         {this.displayUserFavouritesFunction()}
 
