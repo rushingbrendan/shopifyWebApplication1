@@ -1,3 +1,7 @@
+
+ul li { padding: 5px 0px; }
+
+
 .wasteInfoContainer
 {
     margin: auto;
@@ -60,8 +64,85 @@
     line-height: 20px;
 }
 
-.searchButton
+
+  
+.searchFrame
 {
-    width: 200px;
-    height: 50px;
+    width: 1050px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.searchInput {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 90%;
+  background: #f1f1f1;
+}
+
+.searchButton {
+  float: right;
+  width: 8%;
+  padding: 12px;
+  background: #2196F3;
+  color: white;
+  font-size: 12px;
+  border: 1px solid grey;
+  border-left: none;
+  cursor: pointer;
+}
+
+.searchButton :hover {
+  background: #0b7dda;
+  color: yellow;    
+  
+}
+
+form.example::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.checkboxColumn{
+    float: middle;
+    
+    vertical-align: top;
+    width: 5%;
+    border: solid black 1px;
+    
+}
+
+.titleColumn{
+    float: left;
+    text-align: left;
+    vertical-align: top;
+    width: 35%;
+    border: solid black 1px;
+
+
+}
+
+.bodyColumn{
+    float: left;
+    text-align: left;
+    vertical-align: top;
+
+    width: 55%;
+    border: solid black 1px;
+}
+
+.horizontalPaddingColumn{
+    width:5%;
 }

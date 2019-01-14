@@ -11,14 +11,12 @@ class TorontoWasteLookup extends Component {
         
         super(props);
         this.state = {
-            searchInput: '',
-            //searchKeyword: "takeout",
-            searchKeyword: "egg carton",
-            //searchKeyword: "bread bag tag, milk bag tag, elastic band, rubber band, twist tie, rope, twine, string, hemp, ribbon, bow, burlap, staple, fastener, wire, florists wire, plastic tag, tape, duct tape, electrical tape, masking tape, scotch tape, painters tape, tape dispenser, chain, nylon, thread",
+            searchInput: '',            
+            searchKeyword: '',            
             rawData: [],
             matchedData: [],
             favourites: [],
-            selectedFavourite: "Oversize (flooring & carpeting)"
+            selectedFavourite: ''
         };
     }
 
@@ -41,14 +39,12 @@ class TorontoWasteLookup extends Component {
             this.state.favourites.push(event.target.value)      
           }
           else if (event.target.checked === false){
-                // Find and remove item from an array
-                var i = this.state.favourites.indexOf(event.target.value);
-                if(i !== -1) {
-	                this.state.favourites.splice(i, 1);
-                }
-            //this.state.favourites.pop(event.target.value)      
-          }
-        
+            // Find and remove item from an array
+            var i = this.state.favourites.indexOf(event.target.value);
+            if(i !== -1) {
+                this.state.favourites.splice(i, 1);
+            }            
+          }        
       }
 
     /* Triggered when search button is clicked */
@@ -63,23 +59,23 @@ class TorontoWasteLookup extends Component {
             <div>
             {this.state.rawData.filter(result=>result.keywords.includes(this.state.searchInput)).map(item=>
             
-              <div className="APIreturnedDataFont" >      
-                  <table border="1">
-                      <tbody>
-                          <td width="5" align="right">
-                              <input type="checkbox" value={item.title} onChange={this.updateFavourites} defaultChecked={false}></input>
-                          </td>
-                          <td width ="500 px" align="left">
-                              <h4>&nbsp;&nbsp;{item.title}</h4>
-                          </td>                    
-                          <td width="700 px" align="left">
-                          
-                            <div dangerouslySetInnerHTML={{
-                                __html: item.body.split('&lt;').join('<').split('&gt;').join('>')
-                                }} />                                                          
-                          </td>      
-                      </tbody>
-                  </table>                      
+              <div className="APIreturnedDataFont" >                                      
+                <div className="checkboxColumn">
+                <br></br>
+                    <input type="checkbox" key={item.title} value={item.title} onChange={this.updateFavourites} 
+                     defaultChecked={this.determineCheckStatus}>
+                     </input>
+            </div>
+                <div className="titleColumn">
+                    <h4>&nbsp;&nbsp;{item.title}</h4>
+                </div>                    
+                <div className="horizontalPaddingColumn"></div>
+                <div className="bodyColumn">
+                
+                <div dangerouslySetInnerHTML={{
+                    __html: item.body.split('&lt;').join('<').split('&gt;').join('>')
+                    }} />                                                          
+                </div>                                              
               </div>
             )}      
       </div>
@@ -95,8 +91,9 @@ class TorontoWasteLookup extends Component {
               <div className="APIreturnedDataFont" >      
                   <table border="1">
                       <tbody>
-                          <td width="5" align="right">
-                              <input type="checkbox" value={item.title} onChange={this.updateFavourites} defaultChecked={false}></input>
+                          <td width="10 px" align="right">
+                              <input type="checkbox" value={item.title} 
+                                onChange={this.updateFavourites} checked={true}></input>
                           </td>
                           <td width ="500 px" align="left">
                               <h4>&nbsp;&nbsp;{item.title}</h4>
@@ -116,30 +113,15 @@ class TorontoWasteLookup extends Component {
     }
 
 
-    displayUserFavourites = (event) => {
-        return(
-            <div>
-                {this.state.favourites.map(currentFavourite =>
-                    {this.state.rawData.map(currentItem =>
-                        
-                        {if (1 === 1){
-                            return (<div>UDYSKFHKHF</div>)
-                        }}
-                        
-                        )}                    
-                    )}
+    determineCheckStatus = (event) => {
+        if (this.state.favourites.includes(event.target.value)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 
-            </div>
-            )}
-
-
-
-
-
-
-
-
-    
 
   render() {
 
@@ -152,32 +134,28 @@ class TorontoWasteLookup extends Component {
       </div>
       <br className ="spaceUnderHeader"></br>
 
-      <div>
-      <input type="text" className="searchInput" value={this.state.searchInput} onChange={event => this.updateSearchInput(event)}></input>
-            
-      <button id="searchButton" className="fas fa-search" onClick={this.handleKeywordSearch}></button>
+      <div className ="searchFrame">
+        <input type="text" className="searchInput" value={this.state.searchInput} onChange={event => this.updateSearchInput(event)}></input>            
+        <button className="searchButton" id="searchButton" type="button" onClick={this.handleKeywordSearch}>
+            <i class="fa fa-search fa-2x"></i>
+        </button>
       </div>
 
+        
 
-      <br className ="spaceUnderHeader"></br>
 
  
 
 
+      <div className ="searchFrame">
       {this.getDataFromAPI()}
 
-      <br className ="spaceUnderHeader"></br>
+      
       <h1>Current Favourite</h1>
-
-      {this.state.favourites.map(favourites=>
-            
-            <div className="APIreturnedDataFont" > 
-            {favourites}     
-            </div>
-            )}
+      
         {this.displayUserFavouritesFunction()}
 
-
+        </div>
       </div>
     );
     
