@@ -21,7 +21,9 @@ class TorontoWasteLookup extends Component {
     }
 
     componentDidMount(){
-
+        fetch('https://secure.toronto.ca/cc_sr_v1/data/swm_waste_wizard_APR?limit=1000')
+        .then(res => res.json())
+        .then(rawData => this.setState({rawData}));
     }
 
     updateSearchInput(event) {
@@ -49,9 +51,7 @@ class TorontoWasteLookup extends Component {
 
     /* Triggered when search button is clicked */
     handleKeywordSearch = (event) => {
-        fetch('https://secure.toronto.ca/cc_sr_v1/data/swm_waste_wizard_APR?limit=1000')
-        .then(res => res.json())
-        .then(rawData => this.setState({rawData}));
+
     }
 
     getDataFromAPI = (event) => {
@@ -91,25 +91,25 @@ class TorontoWasteLookup extends Component {
                 <div>
 
                 {this.state.rawData.filter(result=>this.state.favourites.includes(result.title)).map(item=>                    
-                <div className="APIreturnedDataFont" >                                      
+                <div className="favouritesBackground" >                                      
                     <div className="checkboxColumn">
                         <br></br>
                         <input type="checkbox" className="favouriteCheckbox" key={item.title} value={item.title} onChange={this.updateFavourites} 
                             checked={true}>
                         </input>
                     </div>
-                <div className="titleColumn">
-                    <h4>&nbsp;&nbsp;{item.title}</h4>
-                </div>                    
-                <div className="horizontalPaddingColumn"></div>
-                    <div className="bodyColumn">
-            
-                    <div dangerouslySetInnerHTML={{
-                        __html: item.body.split('&lt;').join('<').split('&gt;').join('>')
-                    }} />                                                          
-                    </div>  
-                </div>                                            
-            
+                    <div className="titleColumn">
+                        <h4>&nbsp;&nbsp;{item.title}</h4>
+                    </div>                    
+                    <div className="horizontalPaddingColumn"></div>
+                        <div className="bodyColumn">
+                
+                        <div dangerouslySetInnerHTML={{
+                            __html: item.body.split('&lt;').join('<').split('&gt;').join('>')
+                        }} />                                                          
+                        </div>  
+                    </div>                                            
+                
                 )}      
           </div>
             )

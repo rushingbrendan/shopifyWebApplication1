@@ -205,3 +205,9 @@ form.example::after {
     height: 10px;
 
 }
+
+.favouritesBackground
+{
+    background-color: lightgreen;
+    color: lightgreen;
+}
