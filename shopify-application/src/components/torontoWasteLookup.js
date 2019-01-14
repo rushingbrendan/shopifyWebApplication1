@@ -18,6 +18,8 @@ class TorontoWasteLookup extends Component {
             favourites: [],
             selectedFavourite: ''
         };
+
+        //this.updateFavourites = this.updateFavourites.bind(this);
     }
 
     componentDidMount(){
@@ -28,27 +30,29 @@ class TorontoWasteLookup extends Component {
 
     updateSearchInput(event) {
 
-
         this.setState({
           searchInput: event.target.value
         });
     }
 
-    updateFavourites = (event) => {
+    updateFavourites = event => {
+
+        console.log("IN UPDATE FAVOURITES" + event.target.value);
         this.setState({
             selectedFavourite: event.target.value    
           });
+          
 
-          if(event.target.checked === true){
-            this.state.favourites.push(event.target.value)      
-          }
-          else if (event.target.checked === false){
+          if (this.state.favourites.includes(event.target.value)){
             // Find and remove item from an array
             var i = this.state.favourites.indexOf(event.target.value);
             if(i !== -1) {
                 this.state.favourites.splice(i, 1);
-            }            
-          }        
+            }  
+          }
+          else{
+            this.state.favourites.push(event.target.value);   
+          }
       }
 
     /* Triggered when search button is clicked */
@@ -59,14 +63,17 @@ class TorontoWasteLookup extends Component {
     getDataFromAPI = (event) => {
         if (this.state.searchInput !== '')              {
             return(
-                <div >
+                <div>
                 {this.state.rawData.filter(result=>result.keywords.includes(this.state.searchInput)).map(item=>            
                     <div className="APIreturnedDataFont" >                                      
                         <div className="checkboxColumn">
                             <br></br>
-                        <input type="checkbox" className="favouriteCheckbox" key={item.title} value={item.title} onChange={this.updateFavourites} 
-                            defaultChecked={this.determineCheckStatus}>
-                        </input>
+                            
+                            <button className="starButton"  key={item.title} value={item.title} onClick={this.updateFavourites}>
+                                <i class="fas fa-star fa-3x"></i>
+                            </button>
+ 
+
                     </div>
                     <div className="titleColumn">
                         <h4>&nbsp;&nbsp;{item.title}</h4>
@@ -184,7 +191,7 @@ class TorontoWasteLookup extends Component {
                 onChange={event => this.updateSearchInput(event)}></input>     
                                 
             <button className="searchButton" id="searchButton" type="button" onClick={this.handleKeywordSearch}>
-                <i class="fa fa-search fa-3x"></i>
+                <i className="fa fa-search fa-3x"></i>
             </button>
         </div>
 
@@ -193,7 +200,12 @@ class TorontoWasteLookup extends Component {
             {this.getDataFromAPI()}
         </div>
 
+        <input type="checkbox" onChange={this.updateFavourites} value="test"></input>
 
+        <button className="starButton" onClick={this.updateFavourites} >
+                            
+                            <i class="fas fa-star fa-3x"></i>
+                        </button>
 
 
 

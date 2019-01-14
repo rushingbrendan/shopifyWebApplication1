@@ -120,7 +120,7 @@ ul li { padding: 5px 0px; }
   background: rgb(41, 144,	89);
   color: white;
   font-size: 12px;
-  border: 1px solid grey;
+  border: 1px rgb(41, 144,	89);
   border-left: none;
   cursor: pointer;
   border-radius: 5px;
@@ -242,7 +242,17 @@ form.example::after {
         
 }
 
+.starButton
+{
+    border: 0px;
+    color: rgb(170, 170, 170);
+}
 
+.starButtonActivated
+{
+    border: 0px;
+    color: rgb(43, 152, 94);
+}
 
 
 
