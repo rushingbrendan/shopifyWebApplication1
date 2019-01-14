@@ -129,7 +129,7 @@ form.example::after {
     
     vertical-align: top;
     width: 5%;
-    border: solid black 1px;
+    /* border: solid black 1px; */
     
 }
 
@@ -138,7 +138,7 @@ form.example::after {
     text-align: left;
     vertical-align: top;
     width: 35%;
-    border: solid black 1px;
+    /* border: solid black 1px; */
 
 
 }
@@ -151,11 +151,11 @@ form.example::after {
     vertical-align: top;
 
     width: 55%;
-    border: solid black 1px;
+    /* border: solid black 1px; */
 }
 
 .horizontalPaddingColumn{
-    width:5%;
+    width:2%;
 }
 
 .favouritesTitle
@@ -175,4 +175,11 @@ form.example::after {
     font-size: 60px;
     font-weight: bolder;
     color: white;
+}
+
+
+.favouriteCheckbox
+{
+    width: 20px;
+    height: 20px;
 }

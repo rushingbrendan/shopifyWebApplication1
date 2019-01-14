@@ -62,7 +62,7 @@ class TorontoWasteLookup extends Component {
               <div className="APIreturnedDataFont" >                                      
                 <div className="checkboxColumn">
                 <br></br>
-                    <input type="checkbox" key={item.title} value={item.title} onChange={this.updateFavourites} 
+                    <input type="checkbox" className="favouriteCheckbox" key={item.title} value={item.title} onChange={this.updateFavourites} 
                      defaultChecked={this.determineCheckStatus}>
                      </input>
             </div>
