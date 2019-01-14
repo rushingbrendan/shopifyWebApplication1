@@ -85,34 +85,39 @@ class TorontoWasteLookup extends Component {
 
 
     displayUserFavouritesFunction = (event) => {
-        return(              
-            <div>
 
-            {this.state.rawData.filter(result=>this.state.favourites.includes(result.title)).map(item=>
+        if ((this.state.favourites.length) > 1){
+            return(
+                <div>
+
+                {this.state.rawData.filter(result=>this.state.favourites.includes(result.title)).map(item=>                    
+                <div className="APIreturnedDataFont" >                                      
+                    <div className="checkboxColumn">
+                        <br></br>
+                        <input type="checkbox" className="favouriteCheckbox" key={item.title} value={item.title} onChange={this.updateFavourites} 
+                            checked={true}>
+                        </input>
+                    </div>
+                <div className="titleColumn">
+                    <h4>&nbsp;&nbsp;{item.title}</h4>
+                </div>                    
+                <div className="horizontalPaddingColumn"></div>
+                    <div className="bodyColumn">
             
+                    <div dangerouslySetInnerHTML={{
+                        __html: item.body.split('&lt;').join('<').split('&gt;').join('>')
+                    }} />                                                          
+                    </div>  
+                </div>                                            
             
-            <div className="APIreturnedDataFont" >                                      
-                <div className="checkboxColumn">
-                    <br></br>
-                    <input type="checkbox" className="favouriteCheckbox" key={item.title} value={item.title} onChange={this.updateFavourites} 
-                        checked={true}>
-                    </input>
-                </div>
-            <div className="titleColumn">
-                <h4>&nbsp;&nbsp;{item.title}</h4>
-            </div>                    
-            <div className="horizontalPaddingColumn"></div>
-                <div className="bodyColumn">
-        
-                <div dangerouslySetInnerHTML={{
-                    __html: item.body.split('&lt;').join('<').split('&gt;').join('>')
-                }} />                                                          
-            </div>  
-            </div>                                            
-        
-            )}      
-      </div>
-        )
+                )}      
+          </div>
+            )
+
+        }
+        else{
+            return(<div></div>)
+        }    
     }
 
     
@@ -160,7 +165,6 @@ class TorontoWasteLookup extends Component {
             <br className="spaceUnderHeader"></br>
             </div>
 
-      
         {this.displayUserFavouritesFunction()}
 
         </div>
