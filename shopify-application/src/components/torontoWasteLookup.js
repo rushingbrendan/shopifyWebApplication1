@@ -27,6 +27,8 @@ class TorontoWasteLookup extends Component {
     }
 
     updateSearchInput(event) {
+
+
         this.setState({
           searchInput: event.target.value
         });
@@ -56,7 +58,7 @@ class TorontoWasteLookup extends Component {
 
     getDataFromAPI = (event) => {
     return(              
-        <div>
+        <div >
         {this.state.rawData.filter(result=>result.keywords.includes(this.state.searchInput)).map(item=>            
             <div className="APIreturnedDataFont" >                                      
                 <div className="checkboxColumn">
@@ -76,7 +78,8 @@ class TorontoWasteLookup extends Component {
                 }} />                                                          
             </div>                                              
         </div>
-        )}      
+        )}
+        
       </div>
         )
     }
@@ -85,32 +88,34 @@ class TorontoWasteLookup extends Component {
 
 
     displayUserFavouritesFunction = (event) => {
-
         if ((this.state.favourites.length) > 1){
             return(
                 <div>
-
-                {this.state.rawData.filter(result=>this.state.favourites.includes(result.title)).map(item=>                    
-                <div className="favouritesBackground" >                                      
-                    <div className="checkboxColumn">
-                        <br></br>
-                        <input type="checkbox" className="favouriteCheckbox" key={item.title} value={item.title} onChange={this.updateFavourites} 
-                            checked={true}>
-                        </input>
-                    </div>
-                    <div className="titleColumn">
-                        <h4>&nbsp;&nbsp;{item.title}</h4>
-                    </div>                    
-                    <div className="horizontalPaddingColumn"></div>
-                        <div className="bodyColumn">
-                
-                        <div dangerouslySetInnerHTML={{
-                            __html: item.body.split('&lt;').join('<').split('&gt;').join('>')
-                        }} />                                                          
-                        </div>  
-                    </div>                                            
-                
+                    <br className ="spaceAboveFavouritesTitle"></br>
+                    <div className="favouritesBackground" >
+                    {this.displayFavouritesTitle()}
+                    <br className ="spaceBelowFavouritesTitle"></br>
+                {this.state.rawData.filter(result=>this.state.favourites.includes(result.title)).map(item=>                                                        
+                    <div className="alignFavouriteData">                                      
+                        <div className="checkboxColumn">
+                            <br></br>
+                            <input type="checkbox" className="favouriteCheckbox" key={item.title} value={item.title} onChange={this.updateFavourites} 
+                                checked={true}>
+                            </input>
+                        </div>
+                        <div className="titleColumn">
+                            <h4>&nbsp;&nbsp;{item.title}</h4>
+                        </div>                    
+                        <div className="horizontalPaddingColumn"></div>
+                            <div className="bodyColumn">
+                    
+                            <div dangerouslySetInnerHTML={{
+                                __html: item.body.split('&lt;').join('<').split('&gt;').join('>')
+                            }} />                                                          
+                            </div>  
+                        </div>                                                                                
                 )}      
+                </div>
           </div>
             )
 
@@ -121,15 +126,17 @@ class TorontoWasteLookup extends Component {
     }
 
     displayFavouritesTitle = (event) => {
-
         if ((this.state.favourites.length) > 1){
             return(
                 <div className="favouritesContainer">
-                <p className="favouritesTitle">Favourites</p>
-                <br className="spaceUnderHeader"></br>
+                    <br className="spaceUnderHeader"></br>
+                    <div className="alignFavouriteTitle">
+                        <p className="favouritesTitle">Favourites</p>
+                    </div>
+
+                    <br className="spaceUnderHeader"></br>
                 </div>
             )
-
         }
         else{
             return(<div></div>)
@@ -156,6 +163,10 @@ class TorontoWasteLookup extends Component {
         
       <div className="App">
         <br></br>
+
+
+
+
         
         <div className="headerBox">
         <h1 className="headerTitle">Toronto Waste Lookup</h1>
@@ -173,17 +184,17 @@ class TorontoWasteLookup extends Component {
         </div>
 
         
-      <div className ="searchFrame">
-        {this.getDataFromAPI()}
+        <div className ="searchFrame">
+            {this.getDataFromAPI()}
+        </div>
 
 
 
-{this.displayFavouritesTitle()}
-                
-                <br className ="spaceUnderHeader"></br>
+
+
         {this.displayUserFavouritesFunction()}
 
-        </div>
+        
       </div>
     );
     

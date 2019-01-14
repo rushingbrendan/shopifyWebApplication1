@@ -117,7 +117,7 @@ ul li { padding: 5px 0px; }
   float: right;
   width: 11%;
   padding: 13px;
-  background: rgb(85, 148, 83);
+  background: rgb(41, 144,	89);
   color: white;
   font-size: 12px;
   border: 1px solid grey;
@@ -178,7 +178,7 @@ form.example::after {
     vertical-align: top;
     font-size: 40px;
     font-weight: bolder;
-    color: green;
+    color: rgb(43,	152,	94	);
     
 }
 
@@ -208,6 +208,42 @@ form.example::after {
 
 .favouritesBackground
 {
-    background-color: lightgreen;
-    color: lightgreen;
+    background-color: rgb(247, 254,	250	);
+    width: 100%;
+        
 }
+.alignFavouriteData
+{
+    display: flex;
+    justify-content: center;
+    font-size: 14pt;
+}
+
+.alignFavouriteTitle
+{
+    width: 50%;
+    text-indent: 17%;
+}
+
+.spaceAboveFavouritesTitle
+{
+    line-height: 10px;
+}
+.spaceBelowFavouritesTitle
+{
+    line-height: 30px;
+}
+
+.wasteDataBackground
+{
+    background-color: white;
+    width: 100%;
+    
+        
+}
+
+
+
+
+
+
