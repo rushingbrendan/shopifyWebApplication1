@@ -5,8 +5,10 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faIgloo } from '@fortawesome/free-solid-svg-icons';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { faSearch} from '@fortawesome/free-solid-svg-icons';
 
 library.add(faStar);
+library.add(faSearch);
 
 
 class TorontoWasteLookup extends Component {
@@ -108,8 +110,10 @@ class TorontoWasteLookup extends Component {
         if ((this.state.favourites.length) > 1){
             return(
                 <div>
+                            <div className="favouritesBackground" >
+                        <div className ="searchFrame"></div>
                     <br className ="spaceAboveFavouritesTitle"></br>
-                    <div className="favouritesBackground" >
+                    
                     {this.displayFavouritesTitle()}
                     <br className ="spaceBelowFavouritesTitle"></br>
 
@@ -137,7 +141,9 @@ class TorontoWasteLookup extends Component {
                         </div>                                                                                
                 )}      
                 </div>
-          </div>
+                </div>
+                
+          
             )
 
         }
@@ -155,7 +161,7 @@ class TorontoWasteLookup extends Component {
                         <p className="favouritesTitle">Favourites</p>
                     </div>
 
-                    <br className="spaceUnderHeader"></br>
+                    <br className="spaceUnderFavouritesTitle"></br>
                 </div>
             )
         }
@@ -209,10 +215,9 @@ class TorontoWasteLookup extends Component {
             <br className ="spaceUnderWasteData"></br>
         </div>
 
+                {this.displayUserFavouritesFunction()}
+            </div>
 
-        {this.displayUserFavouritesFunction()}
-
-      </div>
     );
     
   }
