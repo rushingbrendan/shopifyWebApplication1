@@ -58,16 +58,19 @@ class TorontoWasteLookup extends Component {
         this.setState({
           searchInput: event.target.value
         });
+
+        if (event.key === 'Enter'){
+            this.submitForm();
+        }
+
+        
     }
 
-    updateFavourites = event => {
-
-        console.log("IN UPDATE FAVOURITES" + event);
+    updateFavourites = event => {        
         this.setState({
             selectedFavourite: event 
           });
           
-
           if (this.state.favourites.includes(event)){
             // Find and remove item from an array
             var i = this.state.favourites.indexOf(event);
@@ -83,15 +86,21 @@ class TorontoWasteLookup extends Component {
     /* Triggered when search button is clicked */
     submitForm = (event) => {
 
+        this.setState({
+            searchKeyword: this.state.searchInput
+          });
+        
+          console.log("in submit form");
+
         //this.sea
 
     }
 
     getDataFromAPI = (event) => {
-        if (this.state.searchInput !== '')              {
+        if (this.state.searchKeyword !== ''){
             return(
                 <div>
-                {this.state.rawData.filter(result=>result.keywords.includes(this.state.searchInput)).map(item=>            
+                {this.state.rawData.filter(result=>result.keywords.includes(this.state.searchKeyword)).map(item=>            
                     <div className="APIreturnedDataFont" >                                      
                         <div className="checkboxColumn">
                             <br></br>
@@ -222,9 +231,14 @@ class TorontoWasteLookup extends Component {
 
         <div className ="searchFrame">
             <input type="text" className="searchInput" value={this.state.searchInput} placeholder="Enter search keyword..."
-                onChange={event => this.updateSearchInput(event)}></input>     
+                onChange={event => this.updateSearchInput(event)}
+                onKeyPress={event => {
+                    if (event.key === 'Enter') {
+                      this.submitForm()}
+                  }}>
+            </input>     
                      
-            <button className="searchButton" id="searchButton" type="button" onSubmit={this.submitForm}>
+            <button className="searchButton" id="searchButton" type="button" onClick={this.submitForm}>
                 <i className="fa fa-search fa-4x"></i>
             </button>
         </div>
