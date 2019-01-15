@@ -1,17 +1,6 @@
-
 import React, { Component } from 'react';
 import './torontoWasteLookup.css';
-
-/*  FontAwesomesome Icon Library used for star icon and search icon
-
-star icon: https://fontawesome.com/icons/star?style=solid
-search icon: https://fontawesome.com/icons/search?style=solid
-
-This icon is licensed under the Creative Commons Attribution 4.0 International license.
-
-License Link: https://fontawesome.com/license
-*/
-
+//import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
@@ -21,6 +10,18 @@ library.add(faStar);
 library.add(faSearch);
 
 
+/*
+
+TO DO:
+
+
+
+    3. align plain text
+
+
+
+
+*/
 
 class TorontoWasteLookup extends Component {
 
@@ -37,7 +38,8 @@ class TorontoWasteLookup extends Component {
             favourites: [],
             selectedFavourite: ''
         };
-        
+
+        //this.updateFavourites = this.updateFavourites.bind(this);
     }
 
     componentDidMount(){
@@ -51,6 +53,9 @@ class TorontoWasteLookup extends Component {
         this.setState({
           searchInput: event.target.value
         });
+        console.log("in updateSearchInput: "+event.target.value);
+
+        
     }
 
     updateFavourites = event => {        
@@ -84,16 +89,18 @@ class TorontoWasteLookup extends Component {
     }
 
     getDataFromAPI = (event) => {
+
+
         if (this.state.searchKeyword !== ""){
             return(
                 <div>
-                {this.state.rawData.filter(result=>result.keywords.match(this.state.searchKeyword)).map(item=>            
+                {this.state.rawData.filter(result=>result.keywords.includes(this.state.searchKeyword)).map(item=>            
                     <div className="APIreturnedDataFont" >                                      
                         <div className="checkboxColumn">
                             <br></br>
                             
-                            <FontAwesomeIcon size="2x" icon="star"
-                            onClick={() => this.updateFavourites(item.title)} className={this.determineStarType(item.title)}/>                                                      
+                            <FontAwesomeIcon size="1x" icon="star" color={this.determineStarType(item.title)}
+                            onClick={() => this.updateFavourites(item.title)} />                                                      
                         </div>
                         <div className="titleColumn">
                             <h4>{item.title}</h4>
@@ -135,9 +142,8 @@ class TorontoWasteLookup extends Component {
                         <div className="checkboxColumn">
                             <br></br>
                             
-                            <FontAwesomeIcon size="2x" icon="star"
-                            onClick={() => this.updateFavourites(item.title)} 
-                            className={this.determineStarType(item.title)}/>                                
+                            <FontAwesomeIcon size="1x" icon="star" color="#2B985E"
+                            onClick={() => this.updateFavourites(item.title)} />                                
                             
                             
                         </div>
@@ -148,13 +154,13 @@ class TorontoWasteLookup extends Component {
                             <div className="bodyColumn">
                     
                             <div dangerouslySetInnerHTML={{
-                                __html: item.body.split('&lt;').join('<').split('&gt;').join('>')
+                                __html: item.body.split('&lt;').join('<').split('&gt;').join('>').split(/&amp;nbsp;/g).join(' ')
                             }} />                                                          
                             </div>  
                         </div>                                                                                
                 )}      
                     </div>
-                    <br className ="spaceUnderFavouriteData"></br>
+                    <div className ="spaceUnderFavouriteData"></div>
                     </div>
                     
                 </div>
@@ -177,7 +183,7 @@ class TorontoWasteLookup extends Component {
                         <p className="favouritesTitle">Favourites</p>
                     </div>
 
-                    <br className="spaceUnderFavouritesTitle"></br>
+                    <div className="spaceUnderFavouritesTitle"></div>
                 </div>
             )
         }
@@ -191,10 +197,12 @@ class TorontoWasteLookup extends Component {
 
     determineStarType(itemTitle) {
         if (this.state.favourites.includes(itemTitle)){
-            return "starButtonActivated";
+            //make star green
+            return "#2B985E";
         }
         else{
-            return "starButton";
+            //make star grey
+            return "#AAAAAA";
         }
     }
 
@@ -214,17 +222,22 @@ class TorontoWasteLookup extends Component {
         <h1 className="headerTitle">Toronto Waste Lookup</h1>
         </div>
         
-        <br className ="spaceUnderHeader"></br>
+        <div className ="spaceUnderHeader"></div>
 
         <div className ="searchFrame">
             <input type="text" className="searchInput"  placeholder="Enter search keyword..."
                 onChange={event => this.updateSearchInput(event)}
-                onKeyDownCapture={event => {                                        
-                    if (this.state.searchInput.length === 0){
+                onKeyDown={event => {
+                    console.log("searchInputLength " + this.state.searchInput.length)
+                    
+                    if (event.target.value === ''){
                         this.submitForm()
                     }
                     else if (event.key === 'Enter') {
-                        this.submitForm()}
+                      this.submitForm()}
+                      else if (event.key === 'Backspace'){
+                          console.log("backspace pressed - searchInputLength: "+ this.state.searchInput.length)                          
+                      }
                   }}>
             </input>     
                      

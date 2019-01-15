@@ -91,12 +91,14 @@ ul li { padding: 5px 0px; }
 
 .spaceUnderFavouritesTitle
 {
-    line-height: 120px;
+    
+    height: 150px;
 }
 
 .spaceUnderHeader
 {
-    line-height: 150px;
+    
+    height: 40px;
 }
 
 .spaceAboveHeader
@@ -177,7 +179,7 @@ form.example::after {
     text-align: left;
     vertical-align: top;
     width: 35%;
-    margin-left: 20px;
+    margin-left: 5px;
     /* border: solid black 1px; */
 
 
@@ -277,16 +279,20 @@ form.example::after {
 .starButton
 {
     border: 0px;
-    color: rgb(170, 170, 170);
+    color: #AAAAAA;
+    text-rendering: optimizeLegibility;
+    
     
 }
 
 .starButtonActivated
 {
     border: 0px;
-    border-color: rgb(247, 254,	250	);
-    color: rgb(43, 152, 94);
-    background-color: rgb(247, 254,	250	);
+    border-color: none;
+    color: #2B985E;
+    background-color: none;
+    text-rendering: optimizeLegibility;
+    
 }
 
 
@@ -298,4 +304,5 @@ form.example::after {
 .spaceUnderFavouriteData
 {
     line-height: 200px;
+    height: 200px;
 }
