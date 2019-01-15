@@ -1,6 +1,17 @@
+
 import React, { Component } from 'react';
 import './torontoWasteLookup.css';
-//import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css';
+
+/*  FontAwesomesome Icon Library used for star icon and search icon
+
+star icon: https://fontawesome.com/icons/star?style=solid
+search icon: https://fontawesome.com/icons/search?style=solid
+
+This icon is licensed under the Creative Commons Attribution 4.0 International license.
+
+License Link: https://fontawesome.com/license
+*/
+
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
@@ -10,18 +21,6 @@ library.add(faStar);
 library.add(faSearch);
 
 
-/*
-
-TO DO:
-
-
-
-    3. align plain text
-
-
-
-
-*/
 
 class TorontoWasteLookup extends Component {
 
@@ -38,8 +37,7 @@ class TorontoWasteLookup extends Component {
             favourites: [],
             selectedFavourite: ''
         };
-
-        //this.updateFavourites = this.updateFavourites.bind(this);
+        
     }
 
     componentDidMount(){
@@ -53,9 +51,6 @@ class TorontoWasteLookup extends Component {
         this.setState({
           searchInput: event.target.value
         });
-        console.log("in updateSearchInput: "+event.target.value);
-
-        
     }
 
     updateFavourites = event => {        
@@ -89,12 +84,10 @@ class TorontoWasteLookup extends Component {
     }
 
     getDataFromAPI = (event) => {
-
-
         if (this.state.searchKeyword !== ""){
             return(
                 <div>
-                {this.state.rawData.filter(result=>result.keywords.includes(this.state.searchKeyword)).map(item=>            
+                {this.state.rawData.filter(result=>result.keywords.match(this.state.searchKeyword)).map(item=>            
                     <div className="APIreturnedDataFont" >                                      
                         <div className="checkboxColumn">
                             <br></br>
@@ -226,17 +219,12 @@ class TorontoWasteLookup extends Component {
         <div className ="searchFrame">
             <input type="text" className="searchInput"  placeholder="Enter search keyword..."
                 onChange={event => this.updateSearchInput(event)}
-                onKeyDown={event => {
-                    console.log("searchInputLength " + this.state.searchInput.length)
-                    
-                    if (event.target.value === ''){
+                onKeyDownCapture={event => {                                        
+                    if (this.state.searchInput.length === 0){
                         this.submitForm()
                     }
                     else if (event.key === 'Enter') {
-                      this.submitForm()}
-                      else if (event.key === 'Backspace'){
-                          console.log("backspace pressed - searchInputLength: "+ this.state.searchInput.length)                          
-                      }
+                        this.submitForm()}
                   }}>
             </input>     
                      
