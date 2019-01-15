@@ -10,7 +10,7 @@ ul li { padding: 5px 0px; }
     justify-content: center;
     margin: auto;
     height: 100%;
-    box-shadow: 3px 3px 3px 3px rgb(223,	225,	227	);
+    
 }
 .wasteInfoContainer
 {
@@ -56,14 +56,29 @@ ul li { padding: 5px 0px; }
 {
     width: 100%;
     height: 200px;
-    background-color: rgb(85, 148, 83);
-    color: white;
     display: flex;
     justify-content: center;
     display: inline-block;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
+
+      /* can be treated like a fallback */
+  background-color: #215A92;
+
+  /* will be "on top", if browser supports it */
+  background-image:
+    linear-gradient(
+      to right, 
+      #215A92, #29925E
+    );
+
+  /* these will reset other properties, like background-position, but it does know what you mean */
+  background: #215A92;
+  background:     linear-gradient(
+    to right, 
+    #215A92, #29925E
+  );
         
 }
 
@@ -162,6 +177,7 @@ form.example::after {
     text-align: left;
     vertical-align: top;
     width: 35%;
+    margin-left: 20px;
     /* border: solid black 1px; */
 
 
@@ -173,6 +189,8 @@ form.example::after {
     float: left;
     text-align: left;
     vertical-align: top;
+    
+    
 
     width: 55%;
     /* border: solid black 1px; */

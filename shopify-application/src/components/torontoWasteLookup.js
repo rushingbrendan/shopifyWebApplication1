@@ -3,7 +3,6 @@ import './torontoWasteLookup.css';
 //import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faIgloo } from '@fortawesome/free-solid-svg-icons';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { faSearch} from '@fortawesome/free-solid-svg-icons';
 
@@ -14,15 +13,11 @@ library.add(faSearch);
 /*
 
 TO DO:
-    1. Perform search on:
-        a. enter
-        b. click button
 
-    2. remove nbsp;
+
 
     3. align plain text
 
-    4. add gradient to header
 
 
 
@@ -58,10 +53,7 @@ class TorontoWasteLookup extends Component {
         this.setState({
           searchInput: event.target.value
         });
-
-        if (event.key === 'Enter'){
-            this.submitForm();
-        }
+        console.log("in updateSearchInput: "+event.target.value);
 
         
     }
@@ -90,14 +82,16 @@ class TorontoWasteLookup extends Component {
             searchKeyword: this.state.searchInput
           });
         
-          console.log("in submit form");
+          console.log("in submit form. keyword: " + this.state.searchKeyword);
 
-        //this.sea
+        
 
     }
 
     getDataFromAPI = (event) => {
-        if (this.state.searchKeyword !== ''){
+
+
+        if (this.state.searchKeyword !== ""){
             return(
                 <div>
                 {this.state.rawData.filter(result=>result.keywords.includes(this.state.searchKeyword)).map(item=>            
@@ -105,25 +99,25 @@ class TorontoWasteLookup extends Component {
                         <div className="checkboxColumn">
                             <br></br>
                             
-                            <FontAwesomeIcon size="2x" icon="star" style="solid" 
+                            <FontAwesomeIcon size="2x" icon="star"
                             onClick={() => this.updateFavourites(item.title)} className={this.determineStarType(item.title)}/>                                                      
                         </div>
                         <div className="titleColumn">
-                            <h4>&nbsp;&nbsp;{item.title}</h4>
+                            <h4>{item.title}</h4>
                         </div>                    
                         <div className="horizontalPaddingColumn"></div>
                             <div className="bodyColumn">
                     
                             <div dangerouslySetInnerHTML={{
-                                __html: item.body.split('&lt;').join('<').split('&gt;').join('>')
+                                __html: item.body.split('&lt;').join('<').split('&gt;').join('>').split(/&amp;nbsp;/g).join(' ')
                             }} />                                                          
                         </div>                                              
-                    </div>
-                )}
-                
+                    </div>                    
+                )}                
               </div>
                 )
         }
+    
         else{
             return (<div></div>)
         }
@@ -148,14 +142,14 @@ class TorontoWasteLookup extends Component {
                         <div className="checkboxColumn">
                             <br></br>
                             
-                            <FontAwesomeIcon size="2x" icon="star" style="solid" 
+                            <FontAwesomeIcon size="2x" icon="star"
                             onClick={() => this.updateFavourites(item.title)} 
                             className={this.determineStarType(item.title)}/>                                
                             
                             
                         </div>
                         <div className="titleColumn">
-                            <h4>&nbsp;&nbsp;{item.title}</h4>
+                            <h4>{item.title}</h4>
                         </div>                    
                         <div className="horizontalPaddingColumn"></div>
                             <div className="bodyColumn">
@@ -230,11 +224,19 @@ class TorontoWasteLookup extends Component {
         <br className ="spaceUnderHeader"></br>
 
         <div className ="searchFrame">
-            <input type="text" className="searchInput" value={this.state.searchInput} placeholder="Enter search keyword..."
+            <input type="text" className="searchInput"  placeholder="Enter search keyword..."
                 onChange={event => this.updateSearchInput(event)}
-                onKeyPress={event => {
-                    if (event.key === 'Enter') {
+                onKeyDown={event => {
+                    console.log("searchInputLength " + this.state.searchInput.length)
+                    
+                    if (event.target.value === ''){
+                        this.submitForm()
+                    }
+                    else if (event.key === 'Enter') {
                       this.submitForm()}
+                      else if (event.key === 'Backspace'){
+                          console.log("backspace pressed - searchInputLength: "+ this.state.searchInput.length)                          
+                      }
                   }}>
             </input>     
                      
