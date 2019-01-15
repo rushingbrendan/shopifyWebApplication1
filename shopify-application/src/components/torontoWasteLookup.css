@@ -108,14 +108,14 @@ ul li { padding: 5px 0px; }
   font-size: 26px;
   border: 1px solid grey;
   float: left;
-  width: 87%;
-  background: #f1f1f1;
-  border-radius: 5px;
+  width: 89%;
+  background: white;
+  border-radius: 4px;
 }
 
 .searchButton {
   float: right;
-  width: 11%;
+  width: 9%;
   padding: 13px;
   background: rgb(41, 144,	89);
   color: white;

@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import './torontoWasteLookup.css';
 //import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faIgloo } from '@fortawesome/free-solid-svg-icons';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
+
+library.add(faStar);
 
 
 class TorontoWasteLookup extends Component {
@@ -53,7 +59,7 @@ class TorontoWasteLookup extends Component {
           else{
             this.state.favourites.push(event.target.value);   
           }
-      }
+    }
 
     /* Triggered when search button is clicked */
     handleKeywordSearch = (event) => {
@@ -69,11 +75,11 @@ class TorontoWasteLookup extends Component {
                         <div className="checkboxColumn">
                             <br></br>
                             
-                            <button className="starButton"  key={item.title} value={item.title} onClick={this.updateFavourites}>
-                                <i class="fas fa-star fa-3x"></i>
+                            <button  key={item.title} value={item.title} onClick={event => this.updateFavourites(event)}>
+                                <FontAwesomeIcon size="3x" icon="star" />                                
                             </button>
  
-
+                            
                     </div>
                     <div className="titleColumn">
                         <h4>&nbsp;&nbsp;{item.title}</h4>
@@ -111,9 +117,10 @@ class TorontoWasteLookup extends Component {
                     <div className="alignFavouriteData">                                      
                         <div className="checkboxColumn">
                             <br></br>
-                            <input type="checkbox" className="favouriteCheckbox" key={item.title} value={item.title} onChange={this.updateFavourites} 
-                                checked={true}>
-                            </input>
+                            <button  key={item.title} value={item.title} onClick={event => this.updateFavourites(event)}>
+                                <FontAwesomeIcon size="3x" icon="star" />                                
+                            </button>
+                            
                         </div>
                         <div className="titleColumn">
                             <h4>&nbsp;&nbsp;{item.title}</h4>
@@ -178,7 +185,6 @@ class TorontoWasteLookup extends Component {
 
 
 
-
         
         <div className="headerBox">
         <h1 className="headerTitle">Toronto Waste Lookup</h1>
@@ -198,20 +204,12 @@ class TorontoWasteLookup extends Component {
         
         <div className ="searchFrame">
             {this.getDataFromAPI()}
+            <br className ="spaceUnderHeader"></br>
         </div>
-
-        <input type="checkbox" onChange={this.updateFavourites} value="test"></input>
-
-        <button className="starButton" onClick={this.updateFavourites} >
-                            
-                            <i class="fas fa-star fa-3x"></i>
-                        </button>
-
 
 
         {this.displayUserFavouritesFunction()}
 
-        
       </div>
     );
     
