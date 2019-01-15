@@ -43,26 +43,28 @@ class TorontoWasteLookup extends Component {
 
     updateFavourites = event => {
 
-        console.log("IN UPDATE FAVOURITES" + event.target.value);
+        console.log("IN UPDATE FAVOURITES" + event);
         this.setState({
-            selectedFavourite: event.target.value    
+            selectedFavourite: event 
           });
           
 
-          if (this.state.favourites.includes(event.target.value)){
+          if (this.state.favourites.includes(event)){
             // Find and remove item from an array
-            var i = this.state.favourites.indexOf(event.target.value);
+            var i = this.state.favourites.indexOf(event);
             if(i !== -1) {
                 this.state.favourites.splice(i, 1);
             }  
           }
           else{
-            this.state.favourites.push(event.target.value);   
+            this.state.favourites.push(event);   
           }
     }
 
     /* Triggered when search button is clicked */
-    handleKeywordSearch = (event) => {
+    submitForm = (event) => {
+
+        //this.sea
 
     }
 
@@ -75,12 +77,9 @@ class TorontoWasteLookup extends Component {
                         <div className="checkboxColumn">
                             <br></br>
                             
-                            <button  key={item.title} value={item.title} onClick={event => this.updateFavourites(event)}>
-                                <FontAwesomeIcon size="3x" icon="star" />                                
-                            </button>
- 
-                            
-                    </div>
+                            <FontAwesomeIcon size="2x" icon="star" style="solid" 
+                            onClick={() => this.updateFavourites(item.title)} className={this.determineStarType(item.title)}/>                                                      
+                        </div>
                     <div className="titleColumn">
                         <h4>&nbsp;&nbsp;{item.title}</h4>
                     </div>                    
@@ -113,13 +112,16 @@ class TorontoWasteLookup extends Component {
                     <div className="favouritesBackground" >
                     {this.displayFavouritesTitle()}
                     <br className ="spaceBelowFavouritesTitle"></br>
+
                 {this.state.rawData.filter(result=>this.state.favourites.includes(result.title)).map(item=>                                                        
                     <div className="alignFavouriteData">                                      
                         <div className="checkboxColumn">
                             <br></br>
-                            <button  key={item.title} value={item.title} onClick={event => this.updateFavourites(event)}>
-                                <FontAwesomeIcon size="3x" icon="star" />                                
-                            </button>
+                            
+                            <FontAwesomeIcon size="2x" icon="star" style="solid" 
+                            onClick={() => this.updateFavourites(item.title)} 
+                            className={this.determineStarType(item.title)}/>                                
+                            
                             
                         </div>
                         <div className="titleColumn">
@@ -148,7 +150,7 @@ class TorontoWasteLookup extends Component {
         if ((this.state.favourites.length) > 1){
             return(
                 <div className="favouritesContainer">
-                    <br className="spaceUnderHeader"></br>
+                    
                     <div className="alignFavouriteTitle">
                         <p className="favouritesTitle">Favourites</p>
                     </div>
@@ -165,12 +167,12 @@ class TorontoWasteLookup extends Component {
     
 
 
-    determineCheckStatus = (event) => {
-        if (this.state.favourites.includes(event.target.value)){
-            return true;
+    determineStarType(itemTitle) {
+        if (this.state.favourites.includes(itemTitle)){
+            return "starButtonActivated";
         }
         else{
-            return false;
+            return "starButton";
         }
     }
 
@@ -196,7 +198,7 @@ class TorontoWasteLookup extends Component {
             <input type="text" className="searchInput" value={this.state.searchInput} placeholder="Enter search keyword..."
                 onChange={event => this.updateSearchInput(event)}></input>     
                                 
-            <button className="searchButton" id="searchButton" type="button" onClick={this.handleKeywordSearch}>
+            <button className="searchButton" id="searchButton" type="button" onSubmit={this.submitForm}>
                 <i className="fa fa-search fa-3x"></i>
             </button>
         </div>
@@ -204,7 +206,7 @@ class TorontoWasteLookup extends Component {
         
         <div className ="searchFrame">
             {this.getDataFromAPI()}
-            <br className ="spaceUnderHeader"></br>
+            <br className ="spaceUnderWasteData"></br>
         </div>
 
 
