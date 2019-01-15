@@ -54,8 +54,8 @@ ul li { padding: 5px 0px; }
 
 .headerBox
 {
-    width: 90%;
-    height: 150px;
+    width: 100%;
+    height: 200px;
     background-color: rgb(85, 148, 83);
     color: white;
     display: flex;
@@ -76,12 +76,12 @@ ul li { padding: 5px 0px; }
 
 .spaceUnderFavouritesTitle
 {
-    line-height: 200px;
+    line-height: 120px;
 }
 
 .spaceUnderHeader
 {
-    line-height: 100px;
+    line-height: 150px;
 }
 
 .spaceAboveHeader
@@ -109,19 +109,19 @@ ul li { padding: 5px 0px; }
 }
 
 .searchInput {
-  padding: 30px;
-  font-size: 26px;
+  padding: 40px;
+  font-size: 28px;
   border: 1px solid grey;
   float: left;
-  width: 89%;
+  width: 91%;
   background: white;
   border-radius: 4px;
 }
 
 .searchButton {
   float: right;
-  width: 5%;
-  padding: 13px;
+  width: 7%;
+  padding: 17px;
   background: rgb(41, 144,	89);
   color: white;
   font-size: 12px;
@@ -129,8 +129,14 @@ ul li { padding: 5px 0px; }
   border-left: none;
   cursor: pointer;
   border-radius: 5px;
+  
 }
 
+.searchBarButtonGap
+{
+    width:80px;
+    float: left;
+}
 .searchButton :hover {
   background: #0b7dda;
   
@@ -207,7 +213,7 @@ form.example::after {
 
     
     width: 80%;
-    height: 10px;
+    
 
 }
 
@@ -230,15 +236,16 @@ form.example::after {
 {
     width: 50%;
     text-indent: 17%;
+    line-height: 1%;
 }
 
 .spaceAboveFavouritesTitle
 {
-    line-height: 10px;
+    line-height: 5px;
 }
 .spaceBelowFavouritesTitle
 {
-    line-height: 30px;
+    line-height: 5px;
 }
 
 .wasteDataBackground
@@ -267,6 +274,10 @@ form.example::after {
 
 .spaceUnderWasteData
 {
-    line-height: 5px;
+    line-height: 1px;
 }
 
+.spaceUnderFavouriteData
+{
+    line-height: 200px;
+}

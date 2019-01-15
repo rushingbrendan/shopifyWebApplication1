@@ -11,6 +11,23 @@ library.add(faStar);
 library.add(faSearch);
 
 
+/*
+
+TO DO:
+    1. Perform search on:
+        a. enter
+        b. click button
+
+    2. remove nbsp;
+
+    3. align plain text
+
+    4. add gradient to header
+
+
+
+*/
+
 class TorontoWasteLookup extends Component {
 
     
@@ -82,17 +99,17 @@ class TorontoWasteLookup extends Component {
                             <FontAwesomeIcon size="2x" icon="star" style="solid" 
                             onClick={() => this.updateFavourites(item.title)} className={this.determineStarType(item.title)}/>                                                      
                         </div>
-                    <div className="titleColumn">
-                        <h4>&nbsp;&nbsp;{item.title}</h4>
-                    </div>                    
-                    <div className="horizontalPaddingColumn"></div>
-                        <div className="bodyColumn">
-                
-                        <div dangerouslySetInnerHTML={{
-                            __html: item.body.split('&lt;').join('<').split('&gt;').join('>')
-                        }} />                                                          
-                    </div>                                              
-                </div>
+                        <div className="titleColumn">
+                            <h4>&nbsp;&nbsp;{item.title}</h4>
+                        </div>                    
+                        <div className="horizontalPaddingColumn"></div>
+                            <div className="bodyColumn">
+                    
+                            <div dangerouslySetInnerHTML={{
+                                __html: item.body.split('&lt;').join('<').split('&gt;').join('>')
+                            }} />                                                          
+                        </div>                                              
+                    </div>
                 )}
                 
               </div>
@@ -110,12 +127,12 @@ class TorontoWasteLookup extends Component {
         if ((this.state.favourites.length) > 1){
             return(
                 <div>
-                            <div className="favouritesBackground" >
-                        <div className ="searchFrame"></div>
-                    <br className ="spaceAboveFavouritesTitle"></br>
+                        <div className="favouritesBackground" >
+                        <div className ="searchFrame">
+                    
                     
                     {this.displayFavouritesTitle()}
-                    <br className ="spaceBelowFavouritesTitle"></br>
+                    
 
                 {this.state.rawData.filter(result=>this.state.favourites.includes(result.title)).map(item=>                                                        
                     <div className="alignFavouriteData">                                      
@@ -140,7 +157,10 @@ class TorontoWasteLookup extends Component {
                             </div>  
                         </div>                                                                                
                 )}      
-                </div>
+                    </div>
+                    <br className ="spaceUnderFavouriteData"></br>
+                    </div>
+                    
                 </div>
                 
           
@@ -189,7 +209,7 @@ class TorontoWasteLookup extends Component {
     return (
         
       <div className="App">
-        <br></br>
+        
 
 
 
@@ -203,9 +223,9 @@ class TorontoWasteLookup extends Component {
         <div className ="searchFrame">
             <input type="text" className="searchInput" value={this.state.searchInput} placeholder="Enter search keyword..."
                 onChange={event => this.updateSearchInput(event)}></input>     
-                                
+                     
             <button className="searchButton" id="searchButton" type="button" onSubmit={this.submitForm}>
-                <i className="fa fa-search fa-3x"></i>
+                <i className="fa fa-search fa-4x"></i>
             </button>
         </div>
 
@@ -216,6 +236,7 @@ class TorontoWasteLookup extends Component {
         </div>
 
                 {this.displayUserFavouritesFunction()}
+                
             </div>
 
     );
