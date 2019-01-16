@@ -10,6 +10,7 @@ ul li { padding: 5px 0px; }
     justify-content: center;
     margin: auto;
     height: 100%;
+    min-width: 1600px;
     
 }
 .wasteInfoContainer
@@ -26,7 +27,7 @@ ul li { padding: 5px 0px; }
 
 .searchInput
 {
-    width: 100%;
+    
     height: 50px;
     font-size: 20pt;
 }
@@ -131,13 +132,16 @@ ul li { padding: 5px 0px; }
   border: 1px solid grey;
   float: left;
   width: 91%;
+  min-width: 1000px;
   background: white;
   border-radius: 4px;
+
 }
 
 .searchButton {
   float: right;
-  width: 7%;
+  width: 8%;
+  
   padding: 17px;
   background: rgb(41, 144,	89);
   color: white;
@@ -147,6 +151,7 @@ ul li { padding: 5px 0px; }
   cursor: pointer;
   border-radius: 5px;
   
+  
 }
 
 .searchBarButtonGap
@@ -155,7 +160,9 @@ ul li { padding: 5px 0px; }
     float: left;
 }
 .searchButton :hover {
-  background: #0b7dda;
+  color:rgb(189, 189, 189);
+  
+  
   
 }
 
