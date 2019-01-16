@@ -1,3 +1,38 @@
+/*
+
+    Project:    Shopify Summer Internship web developer application
+    Programmer: Brendan Rushing
+    Date:       Jan 16, 2018
+
+    Github URL: https://github.com/rushingbrendan/shopifyWebApplication1
+
+    Shopify URL: https://www.shopify.com/careers/web-engineer-intern-summer-2019-7f4bd3
+
+    Project Description:
+
+    Web Engineer Challenge - Summer 2019
+
+    Build a web app to search for waste items using the Toronto Waste Wizard database, and save frequently used ones.
+
+    Instructions
+    Reproduce the design as provided in the screenshot, which displays example search results.
+    The data must be taken from the Waste Wizard Lookup data (JSON).
+    Typing in the search field should NOT perform an API call.
+    A search must be performed when hitting enter or clicking the search button.
+    When the search input field is cleared, the list of results should also be cleared.
+    Performing a search should render a list of potential matching items based on keywords. Each item should:
+    Render the title and description of the item.
+    Render a grey star button if the item is not already favourited.
+    Render a green star icon if the item is not already favourited.
+    Clicking the star button should add the item to the favourites list.
+    When the number of favourites is more than one, the app should render a list of items. Each saved item should:
+    Render the title and description of the item.
+    Render a green star button if the item has been favourited.
+    Clicking the green star button should remove the item from the saved list.
+
+*/
+
+
 //React Component
 import React, { Component } from 'react';
 
@@ -213,8 +248,7 @@ class TorontoWasteLookup extends Component {
         Parameters:     event
         Return:         true                
     */
-    displayUserFavouritesFunction = (event) => {
-        
+    displayUserFavouritesFunction = (event) => {        
 
         //only display if there is more than 1 favourite
         if ((this.state.favourites.length) > 1){
@@ -343,10 +377,12 @@ class TorontoWasteLookup extends Component {
                       this.submitForm();
                     }                      
                   }}>
-            </input> 
+            </input>
+
+            <div className="searchButtonSpaceLeft"></div>
 
             <button className="searchButton" id="searchButton" type="button" onClick={this.submitForm}>
-                <i className="fa fa-search fa-4x"></i>
+                <i className="fa fa-search fa-3x"></i>
             </button>
         </div>
         

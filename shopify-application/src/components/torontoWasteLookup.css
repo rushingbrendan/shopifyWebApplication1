@@ -1,3 +1,37 @@
+/*
+
+    Project:    Shopify Summer Internship web developer application
+    Programmer: Brendan Rushing
+    Date:       Jan 16, 2018
+
+    Github URL: https://github.com/rushingbrendan/shopifyWebApplication1
+
+    Shopify URL: https://www.shopify.com/careers/web-engineer-intern-summer-2019-7f4bd3
+
+    Project Description:
+
+    Web Engineer Challenge - Summer 2019
+
+    Build a web app to search for waste items using the Toronto Waste Wizard database, and save frequently used ones.
+
+    Instructions
+    Reproduce the design as provided in the screenshot, which displays example search results.
+    The data must be taken from the Waste Wizard Lookup data (JSON).
+    Typing in the search field should NOT perform an API call.
+    A search must be performed when hitting enter or clicking the search button.
+    When the search input field is cleared, the list of results should also be cleared.
+    Performing a search should render a list of potential matching items based on keywords. Each item should:
+    Render the title and description of the item.
+    Render a grey star button if the item is not already favourited.
+    Render a green star icon if the item is not already favourited.
+    Clicking the star button should add the item to the favourites list.
+    When the number of favourites is more than one, the app should render a list of items. Each saved item should:
+    Render the title and description of the item.
+    Render a green star button if the item has been favourited.
+    Clicking the green star button should remove the item from the saved list.
+
+*/
+
 
 ul li { padding: 5px 0px; }
 
@@ -10,7 +44,7 @@ ul li { padding: 5px 0px; }
     justify-content: center;
     margin: auto;
     height: 100%;
-    min-width: 1600px;
+    
     
 }
 .wasteInfoContainer
@@ -29,7 +63,7 @@ ul li { padding: 5px 0px; }
 {
     
     height: 50px;
-    font-size: 20pt;
+    font-size: 14pt;
 }
 
 
@@ -43,7 +77,7 @@ ul li { padding: 5px 0px; }
 
 .APIreturnedDataFont
 {
-    font-size: 24pt;
+    font-size: 14pt;
     display: flex;
     justify-content: center;
     height: 100%;
@@ -56,7 +90,8 @@ ul li { padding: 5px 0px; }
 .headerBox
 {
     width: 100%;
-    height: 200px;
+    height: 120px;
+    min-width: 900px;
     display: flex;
     justify-content: center;
     display: inline-block;
@@ -93,7 +128,7 @@ ul li { padding: 5px 0px; }
 .spaceUnderFavouritesTitle
 {
     
-    height: 150px;
+    height: 80px;
 }
 
 .spaceUnderHeader
@@ -112,14 +147,15 @@ ul li { padding: 5px 0px; }
 .searchFrame
 {
     width: 80%;
-    height: 100px;
+    min-width: 900px;
+    
     display: flex;
     justify-content: center;
     display: inline-block;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
-    position: relative;
+    
 }
 
 * {
@@ -127,22 +163,24 @@ ul li { padding: 5px 0px; }
 }
 
 .searchInput {
-  padding: 40px;
-  font-size: 28px;
+  padding: 25px;
+  font-size: 22px;
   border: 1px solid grey;
   float: left;
-  width: 91%;
-  min-width: 1000px;
+  width: 85%;
+  min-width: 700px;
   background: white;
   border-radius: 4px;
 
 }
 
 .searchButton {
-  float: right;
-  width: 8%;
   
-  padding: 17px;
+  width: 8%;
+  float: left;
+  margin-left: 30px;
+  
+  padding: 8px;
   background: rgb(41, 144,	89);
   color: white;
   font-size: 12px;
@@ -159,50 +197,46 @@ ul li { padding: 5px 0px; }
     width:80px;
     float: left;
 }
-.searchButton :hover {
+.searchButton :hover 
+{
   color:rgb(189, 189, 189);
-  
-  
-  
+    
 }
 
-form.example::after {
+form.example::after 
+{
   content: "";
   clear: both;
   display: table;
 }
 
-.checkboxColumn{
+.checkboxColumn
+{
     float: middle;
     
     vertical-align: top;
-    width: 5%;
-    /* border: solid black 1px; */
-    
+    width: 5%;    
 }
 
-.titleColumn{
+.titleColumn
+{
     float: left;
     text-align: left;
     vertical-align: top;
     width: 35%;
     margin-left: 5px;
-    /* border: solid black 1px; */
-
-
+ 
 }
 
 
 
-.bodyColumn{
+.bodyColumn
+{
     float: left;
     text-align: left;
     vertical-align: top;
-    
-    
 
-    width: 55%;
-    /* border: solid black 1px; */
+    width: 55%;    
 }
 
 .horizontalPaddingColumn{
@@ -214,7 +248,7 @@ form.example::after {
     float: left;
     text-align: left;
     vertical-align: top;
-    font-size: 60px;
+    font-size: 35px;
     font-weight: bolder;
     color: rgb(43,	152,	94	);
     
@@ -223,7 +257,7 @@ form.example::after {
 
 .headerTitle
 {
-    font-size: 72px;
+    font-size: 42px;
     font-weight: bolder;
     color: white;
 }
@@ -254,7 +288,7 @@ form.example::after {
 {
     display: flex;
     justify-content: center;
-    font-size: 24pt;
+    font-size: 14pt;
 
     
 }
@@ -312,4 +346,10 @@ form.example::after {
 {
     line-height: 200px;
     height: 200px;
+}
+
+.searchButtonSpaceLeft
+{
+
+    margin-left: 50px;
 }
